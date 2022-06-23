@@ -3,7 +3,7 @@
 
 # # MNIST dataset
 
-# In[134]:
+# In[ ]:
 
 
 from sklearn.datasets import fetch_openml
@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# In[2]:
+# In[ ]:
 
 
 # Fetch data and split into training-validation set and test set
@@ -27,14 +27,14 @@ y = y.astype(np.int8) # converting target to numbers instead of character
 X_prevalidsplit, X_test, y_prevalidsplit, y_test = X[:60000], X[60000:], y[:60000], y[60000:]
 
 
-# In[3]:
+# In[ ]:
 
 
 # Split set into training and validation set
 X_train, X_valid, y_train, y_valid = train_test_split(X_prevalidsplit, y_prevalidsplit, random_state=42, test_size=0.2)
 
 
-# In[4]:
+# In[ ]:
 
 
 # Standardize Xs
@@ -51,7 +51,7 @@ y_test = tf.keras.utils.to_categorical(y_test)
 
 # Define neural network model as object to use for hyperparameters tunning (N of hidden layers, N of neurons within layer, regularization, batch size)
 
-# In[86]:
+# In[ ]:
 
 
 # define model generation function
@@ -84,7 +84,7 @@ dnn_classifier = KerasClassifier(
 )
 
 
-# In[87]:
+# In[ ]:
 
 
 # define hyperparameters space for gridsearch
@@ -100,7 +100,7 @@ nn_hyperparameters = {
 grid_search_cv = GridSearchCV(dnn_classifier, nn_hyperparameters, cv = 3, n_jobs=4)
 
 
-# In[88]:
+# In[ ]:
 
 
 # Run grid search
@@ -113,14 +113,14 @@ grid_search_cv.fit(
 )
 
 
-# In[91]:
+# In[ ]:
 
 
 # See best parameters
 grid_search_cv.best_params_
 
 
-# In[101]:
+# In[ ]:
 
 
 # Refit model with best parameters
@@ -134,7 +134,7 @@ history = best_model.fit(
     callbacks = [stopping_callback])
 
 
-# In[97]:
+# In[ ]:
 
 
 # save fitted model to a file 
@@ -148,7 +148,7 @@ best_model.save("models/dnn.h5")
 #tf.keras.models.load_model("models/dnn.h5")
 
 
-# In[144]:
+# In[ ]:
 
 
 # plot learning curves for metric and loss
@@ -162,7 +162,7 @@ axes[1].set_title('Loss')
 plt.show()
 
 
-# In[135]:
+# In[ ]:
 
 
 # create confusion matrix
@@ -170,7 +170,7 @@ predictions = best_model.predict(X_valid_tr)
 conf_matrix = tf.math.confusion_matrix(labels=tf.argmax(y_valid, axis=1), predictions=tf.argmax(predictions, axis=1))
 
 
-# In[149]:
+# In[ ]:
 
 
 # plot confusion matrix
@@ -178,7 +178,7 @@ plt.figure(figsize=(10,8))
 sns.heatmap(conf_matrix, annot=True, linecolor="white", linewidths=2)
 
 
-# In[143]:
+# In[ ]:
 
 
 # evaluate model on test set
