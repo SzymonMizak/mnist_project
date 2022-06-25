@@ -1,0 +1,12 @@
+,0
+experiment_name,mnist
+random_method,uniform_mersenne
+reduction_method,
+reduction_interval,50
+reduction_window,20
+reduction_threshold,0.2
+reduction_metric,val_acc
+experiment_id,062422194453
+complete_time,06/24/22/23:52
+x_shape,"(48000, 784)"
+y_shape,"(48000, 10)"

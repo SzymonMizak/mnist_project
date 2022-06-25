@@ -120,7 +120,7 @@ params_space = {
 }
 
 
-# In[18]:
+# In[ ]:
 
 
 # Run hyperparameters space scan using random search
